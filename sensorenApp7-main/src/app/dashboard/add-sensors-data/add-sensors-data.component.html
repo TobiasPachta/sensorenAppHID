@@ -1,0 +1,22 @@
+<div class="align-flex-end">
+  <app-button
+    class="float-right"
+    [isOpen]="showAddTask"
+    (btnClick)="toggleAddTask()"
+  ></app-button>
+</div>
+<form [formGroup]="sensorenDataForm" (ngSubmit)="onSubmit()" *ngIf="showAddTask">
+  <h2>Neuen Messwert hinzufügen</h2>
+    <select formControlName="sensorId">
+        <option value="" disabled>Bitte Sensor auswählen</option>
+        <option *ngFor="let item of storeService.sensoren" [ngValue]="item.id">{{item?.name}}</option>
+      </select>
+    <input placeholder="Datum" type="date" name="datum" formControlName="date">
+    <input placeholder="Temperatur (in °C)" type="number" name="Temperatur" formControlName="temperature">
+    <input placeholder="Luftfeuchtigkeit (in %)" type="number" name="Luftfeutigkeit" formControlName="humidity">
+
+    <button class="btn btn-outline-warning" type="submit">
+      <span *ngIf="isAdding" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Erfassen
+    </button>
+</form>

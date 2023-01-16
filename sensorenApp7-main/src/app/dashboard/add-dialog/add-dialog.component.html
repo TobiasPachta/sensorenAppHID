@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Input Data</h1>
+<div mat-dialog-content>
+    <p>Please input the data for new measurement.</p>
+    <mat-form-field>
+        <mat-label>Sensor ID</mat-label>
+        <input matInput [(ngModel)]="data.sensorID" [formControl]="sensorFormControl">
+        <mat-error *ngIf="sensorFormControl.hasError('required')">
+            This field is required!
+        </mat-error>
+        <mat-error *ngIf="sensorFormControl.hasError('pattern')">
+            This field requires a number!
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Temperature</mat-label>
+        <input matInput [(ngModel)]="data.temperature" [formControl]="temperatureFormControl">
+        <mat-error *ngIf="temperatureFormControl.hasError('pattern')">
+            This field requires a number!
+        </mat-error>
+        <mat-error *ngIf="temperatureFormControl.hasError('required')">
+            This field is required!
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Humidity</mat-label>
+        <input matInput [(ngModel)]="data.humidity" [formControl]="humidityFormControl">
+        <mat-error *ngIf="humidityFormControl.hasError('pattern')">
+            This field requires a number!
+        </mat-error>
+        <mat-error *ngIf="humidityFormControl.hasError('required')">
+            This field is required!
+        </mat-error>
+    </mat-form-field>
+
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+    <button mat-stroked-button disabled
+        *ngIf="temperatureFormControl.hasError('required') || humidityFormControl.hasError('required') || temperatureFormControl.hasError('pattern') || humidityFormControl.hasError('pattern')"
+        [mat-dialog-close]="data">Save</button>
+    <button mat-raised-button
+        *ngIf="!temperatureFormControl.hasError('required') && !humidityFormControl.hasError('required') && !temperatureFormControl.hasError('pattern') && !humidityFormControl.hasError('pattern')"
+        color="accent" [mat-dialog-close]="data">Save</button>
+</div>

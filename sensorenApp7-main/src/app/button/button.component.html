@@ -1,0 +1,8 @@
+<button
+  class="btn btn-outline-warning"
+  (click)="onClick()"
+>
+ Daten erfassen
+ <mat-icon *ngIf="!isOpen">keyboard_arrow_down</mat-icon>
+ <mat-icon *ngIf="isOpen">keyboard_arrow_up</mat-icon>
+</button>
